@@ -1,0 +1,150 @@
+ManageScreen:
+    MainPage:
+    SecondPage:
+
+<MainPage>:
+    output: label1
+    m_label:moisture_label
+    name: "main"
+    Label:
+        text: "Irrigation Controller"
+        texture_size:self.size
+        font_size:40
+        pos_hint: {"x":0.3, "y":0.05}
+        background_color:(168/255, 50/255, 88/255,0.5)
+        canvas.before:
+            Color:
+                rgba:self.background_color
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        #Text Properties
+        color: (117/255, 45/255, 224/255,1)
+        bold:True
+        outline_color:(0,0,0,1)
+        outline_width: 2
+        size_hint: 0.4, 0.08
+    Image:
+        source: 'logo.png'
+        allow_stretch: False
+        keep_ratio: False
+        pos_hint: {"x":0.35, "top":0.95}
+        size_hint: 0.3, 0.3
+    Label:
+        id: label1
+        text:"Press 'See Status' to see moisture and irrigation status"
+        texture_size:self.size
+        font_size:30
+        pos_hint: {"x":0.24, "y":0.5}
+        size_hint:0.55, 0.06
+        bold: True
+    Label:
+        id: moisture_label
+        text: ""
+        texture_size:self.size
+        font_size: 53
+        pos_hint:{"x":0.27, "y":0.58}
+        size_hint: (0.55,0.06)
+        bold:True
+        color: (52/255, 235/255, 232/255,1)
+
+
+    RoundedButton:
+        id: btn2
+        text: "Lets Go"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        size_hint:(0.35,0.15)
+        font_size: 35
+        on_release:
+            app.root.current = "second"
+    RoundedButton1:
+        id:btn1
+        text: "See Status"
+        pos_hint:{'center_x':0.5, 'center_y':0.4}
+        size_hint:(0.35, 0.15)
+        font_size:35
+        on_release:
+            root.GetData()
+            root.GetMoisture()
+    Button:
+        id:btn3
+        text: "Quit"
+        pos_hint: {'x':0, "top":1}
+        font_size:35
+        size_hint:(0.15,0.15)
+        on_release:
+            root. CloseProgram()
+<RoundedButton@Button>
+    background_color:  (0, 0,0,0)
+    background_normal: ''
+    up_color: (55/255, 91/255, 207/255,1)
+    down_color: (52/255, 235/255, 204/255,1)
+    canvas.before:
+        Color:
+            rgba: self.up_color if self.state == 'normal' else self.down_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+<RoundedButton1@Button>
+    background_color:  (0, 0,0,0)
+    background_normal: ''
+    up_color: (45/255, 207/255, 110/255,1)
+    down_color: (52/255, 235/255, 204/255,1)
+    canvas.before:
+        Color:
+            rgba: self.up_color if self.state == 'normal' else self.down_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+<SecondPage>:
+    name: "second"
+    FloatLayout:
+        Button:
+            text: "Go Back"
+            font_size: 30
+            pos_hint:{"x":0, "top":1}
+            size_hint:(0.2, 0.12)
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+        Label:
+            text: "Control Panel"
+            font_size: 40
+            pos_hint:{"center_x":0.5,"center_y": 0.9}
+            size_hint:(0.25,0.06)
+        Button:
+            text: "ON"
+            font_size: 35
+            bold: True
+            pos_hint:{"center_x":0.5, "center_y":0.3}
+            size_hint:(0.6, 0.2)
+            background_color:  (0, 1,0,1)
+            background_normal: ''
+            on_release:
+                root.MakeHigh()
+                root.popUp()
+        Button:
+            background_color:  (1, 0,0,1)
+            background_normal: ''
+            down_color: (52/255, 235/255, 204/255,1)
+            text: "OFF"
+            bold:True
+            font_size: 35
+            pos_hint:{"center_x":0.5, "center_y":0.6}
+            size_hint:(0.6, 0.2)
+            on_release:
+                root.MakeLow()
+                root.offPop()
+<P>:
+    l1: label1
+    Label:
+        id: label1
+        text:"Setting Up Database Connection..."
+        font_size: 28
+        bold: True
+        size_hint: (1, 0.4)
+        pos_hint: {"x":0.01, "top":1}
+
+
